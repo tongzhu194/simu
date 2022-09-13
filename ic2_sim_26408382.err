@@ -1,0 +1,267 @@
+/n/home05/tzhu/.local/lib/python3.7/site-packages/haiku/_src/data_structures.py:37: FutureWarning: jax.tree_structure is deprecated, and will be removed in a future release. Use jax.tree_util.tree_structure instead.
+  PyTreeDef = type(jax.tree_structure(None))
+WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+/n/home05/tzhu/.local/lib/python3.7/site-packages/jax/_src/api_util.py:223: SyntaxWarning: Jitted function has invalid argnames {'interactions'} in static_argnames. Function does not take these args.This warning will be replaced by an error after 2022-08-20 at the earliest.
+  "at the earliest.", SyntaxWarning)
+  0%|          | 0/5 [00:00<?, ?it/s]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 20%|██        | 1/5 [00:20<01:23, 20.95s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 40%|████      | 2/5 [00:22<00:45, 15.05s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 60%|██████    | 3/5 [00:23<00:21, 10.91s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 80%|████████  | 4/5 [00:24<00:08,  8.01s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+100%|██████████| 5/5 [00:25<00:00,  5.98s/it]100%|██████████| 5/5 [00:25<00:00,  5.20s/it]
+  0%|          | 0/5 [00:00<?, ?it/s]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 20%|██        | 1/5 [00:01<00:04,  1.23s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 40%|████      | 2/5 [00:02<00:03,  1.26s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 60%|██████    | 3/5 [00:03<00:02,  1.25s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+ 80%|████████  | 4/5 [00:05<00:01,  1.25s/it]Configuring in "../PPC_CUDA//"
+Configuring nextgen sensors in "../PPC_CUDA//"
+Configuring icemodel in "../PPC_CUDA//"
+Configuring tiltmodel in "../PPC_CUDA//"
+Configuring holeice from "../PPC_CUDA//as.dat"
+Configured: xR=1 eff=1 sf=0.45 g=0.9
+Loaded 12 angsens coefficients
+Error: too many random multipliers (150000), truncating to 131072
+Loaded 131072 random multipliers
+ Found 13960 OMs of type -1,0
+Loaded 13960 DOMs (21x19)
+Loaded 6x170 dust layer points
+Ice layer thickness: UNIFORM
+Loaded 42 wavelenth points
+Calculated value of ppm=1837.84
+Loaded 171 ice layers
+
+Running on 108 MPs x 1024 threads
+Kernel uses: l=32 r=64 s=12504 c=0
+Processing f2k muons from stdin on device 0
+Total GPU memory usage: 9118727896  const: 279200  (npho=1024)
+Relative GPU loadings: 1
+CUDA Error: invalid argument
+100%|██████████| 5/5 [00:06<00:00,  1.24s/it]100%|██████████| 5/5 [00:06<00:00,  1.25s/it]
+Traceback (most recent call last):
+  File "/n/home05/tzhu/hebe/examples/fasrc_example_ppc.py", line 244, in <module>
+    main(args)
+  File "/n/home05/tzhu/hebe/examples/fasrc_example_ppc.py", line 231, in main
+    fig_name=f'./plots/{args.final_1}_{args.final_2}_{seed}_{idx}.pdf',
+  File "../hebe/prometheus_plotting.py", line 58, in plot_event
+    for i in range(len(parquet_set[channel].sensor_pos_x[event_id]))
+  File "/n/home05/tzhu/.local/lib/python3.7/site-packages/awkward/highlevel.py", line 1764, in __getitem__
+    tmp = ak._util.wrap(self.layout[where], self._behavior)
+ValueError: key "lepton" does not exist (not in record)
+
+(https://github.com/scikit-hep/awkward-1.0/blob/1.9.0/src/libawkward/util.cpp#L525)
+Fatal error condition occurred in /opt/vcpkg/buildtrees/aws-c-io/src/9e6648842a-364b708815.clean/source/event_loop.c:72: aws_thread_launch(&cleanup_thread, s_event_loop_destroy_async_thread_fn, el_group, &thread_options) == AWS_OP_SUCCESS
+Exiting Application
+################################################################################
+Stack trace:
+################################################################################
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x200af06) [0x2af2f1db3f06]
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x20028e5) [0x2af2f1dab8e5]
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x1f27e09) [0x2af2f1cd0e09]
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x200ba3d) [0x2af2f1db4a3d]
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x1f25948) [0x2af2f1cce948]
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x200ba3d) [0x2af2f1db4a3d]
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x1ee0b46) [0x2af2f1c89b46]
+/n/home05/tzhu/.local/lib/python3.7/site-packages/pyarrow/libarrow.so.900(+0x194546a) [0x2af2f16ee46a]
+/usr/lib64/libc.so.6(+0x39ce9) [0x2af2e09a1ce9]
+/usr/lib64/libc.so.6(+0x39d37) [0x2af2e09a1d37]
+/usr/lib64/libc.so.6(__libc_start_main+0xfc) [0x2af2e098a55c]
+python() [0x40108e]
+/var/slurmd/spool/slurmd/job26408382/slurm_script: line 22: 26097 Aborted                 (core dumped) $CMD
