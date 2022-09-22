@@ -1,0 +1,38 @@
+context {
+  features {
+    key: "event_energy"
+    value: {
+      description: "MC fact (GeV)"
+      dtype: DT_FLOAT
+    }
+  }
+  features {
+    key: "injection_zenith"
+    value: {
+      description: "zenith"
+      dtype: DT_FLOAT
+    }
+  }
+}
+
+node_sets {
+  key: "hit"
+  value {
+    features {
+      key: "4Dvec"
+      value: {
+        description: "(ct,x,y,z) (m))"
+        dtype: DT_FLOAT
+        shape: { dim { size: 4 } }
+      }
+    }
+  }
+}
+
+edge_sets {
+  key: "coincidence"
+  value {
+    source: "hit"
+    target: "hit"
+  }
+}
