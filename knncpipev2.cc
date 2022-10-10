@@ -49,8 +49,9 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
     cout<<"reach"<<endl;
     py::buffer_info buf = points.request();
    
-    if(!hits_num)
+    if(hits_num<8.1)
     {
+            cout<<"<=  8 hits, cut!"<<endl;
             return {};
     }
     /*if(hits_num>20000)
@@ -60,25 +61,26 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
     }*/
     int link_num=0;
     int caus_counter;
-    int knn_num = 6;
+    int knn_num = 9;//change 2 place
     vector<int> ts;
 
     struct sam list[1000];
     double *ptr = (double*)buf.ptr;
-    for(int i=0;i<hits_num-1;i++)
+    for(int i=hits_num-1;i>0;i--)
     {
 
       //cout<<"heyyyy"<<endl;
+      knn_num = 9;
       caus_counter =0;
 
-      if(i<hits_num-1000)
+      if(i>=1000)
       {
-          for(int j=i+1;j<i+1001;j++)
+          for(int j=i-1;j>=i-1000;j--)
           {
-            if(causjudge(ptr,i,j))
+            if(causjudge(ptr,j,i))
             {
                 list[caus_counter].index = j;
-                list[caus_counter].distance = get_distance(ptr,i,j);
+                list[caus_counter].distance = get_distance(ptr,j,i);
                 caus_counter++;
             }   
           }
@@ -86,25 +88,66 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
  
       else
       {
-          for(int j=i+1;j<hits_num;j++)
+          for(int j=i-1;j>=0;j--)
           {
-            if(causjudge(ptr,i,j))
+            if(causjudge(ptr,j,i))
             {
               list[caus_counter].index = j;
-              list[caus_counter].distance = get_distance(ptr,i,j);
+              list[caus_counter].distance = get_distance(ptr,j,i);
               caus_counter++;
             }        
           }
       }
       if(caus_counter>1)
         sort(list, list+caus_counter-1, comp_d);
-      if(caus_counter ==0)
+      if(caus_counter ==0)//link to knn_num nearest time series neighbors
+      {
+        if(i<=knn_num)
+        {
+          for(int k=0;k<=i-1;k++)
+          {
+            ts.push_back(k);
+            ts.push_back(i);
+          }
+        }
+        else
+        {
+          for(int k=1;k<=knn_num;k++)
+          {
+            ts.push_back(i-k);
+            ts.push_back(i);
+          }
+        }
         continue;
-      if(knn_num>caus_counter) knn_num = caus_counter;
+      }
+      if(knn_num>caus_counter)
+      {
+        for(int k=0;k<caus_counter;k++)
+        {
+          ts.push_back(list[k].index);
+          ts.push_back(i);
+        }
+        if(knn_num-caus_counter>i)
+        {
+          for(int k =0;k<=i-1;k++)
+          {
+            ts.push_back(k);
+            ts.push_back(i);
+          }
+          continue;
+        }
+        for(int k=1;k<=knn_num-caus_counter;k++)
+        {
+          ts.push_back(i-k);
+          ts.push_back(i);
+        }
+        continue;
+      }
       for(int k=0;k<knn_num;k++)
       {
-            ts.push_back(i);
+          
             ts.push_back(list[k].index);
+            ts.push_back(i);
             link_num++;
       }
 
