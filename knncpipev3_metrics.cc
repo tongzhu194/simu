@@ -6,6 +6,7 @@
 #include <pybind11/stl.h>
 #include<pybind11/numpy.h>
 #include<algorithm>
+//Last edition oct.20 Metrics are added
 
 namespace py = pybind11;
 
@@ -44,14 +45,14 @@ bool comp_d(const struct sam &a, const struct sam &b)
     else return 0;
 }
 
-vector<int> knndatap(py::array_t<double>& points,int hits_num)
+vector<double> knndatap(py::array_t<double>& points,int hits_num)
 {
     cout<<"reach"<<endl;
     py::buffer_info buf = points.request();
    
-    if(hits_num<8.1)
+    if(hits_num<60.1)
     {
-            cout<<"<=  8 hits, cut!"<<endl;
+            cout<<"<=  60 hits, cut!"<<endl;
             return {};
     }
     /*if(hits_num>20000)
@@ -61,8 +62,8 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
     }*/
     int link_num=0;
     int caus_counter;
-    int knn_num = 9;//change 2 place
-    vector<int> ts;
+    int knn_num = 6;//change 2 place
+    vector<double> ts;
 
     struct sam list[1000];
     double *ptr = (double*)buf.ptr;
@@ -70,7 +71,7 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
     {
 
       //cout<<"heyyyy"<<endl;
-      knn_num = 9;
+      knn_num = 6;
       caus_counter =0;
 
       if(i>=1000)
@@ -108,6 +109,8 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
           {
             ts.push_back(k);
             ts.push_back(i);
+            ts.push_back(get_distance(ptr,k,i));
+
           }
         }
         else
@@ -116,6 +119,8 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
           {
             ts.push_back(i-k);
             ts.push_back(i);
+            ts.push_back(get_distance(ptr,i-k,i));
+
           }
         }
         continue;
@@ -126,6 +131,7 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
         {
           ts.push_back(list[k].index);
           ts.push_back(i);
+          ts.push_back(list[k].distance);
         }
         if(knn_num-caus_counter>i)
         {
@@ -133,6 +139,8 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
           {
             ts.push_back(k);
             ts.push_back(i);
+            ts.push_back(get_distance(ptr,k,i));
+
           }
           continue;
         }
@@ -140,6 +148,8 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
         {
           ts.push_back(i-k);
           ts.push_back(i);
+          ts.push_back(get_distance(ptr,i-k,i));
+
         }
         continue;
       }
@@ -148,6 +158,7 @@ vector<int> knndatap(py::array_t<double>& points,int hits_num)
           
             ts.push_back(list[k].index);
             ts.push_back(i);
+            ts.push_back(list[k].distance);
             link_num++;
       }
 
