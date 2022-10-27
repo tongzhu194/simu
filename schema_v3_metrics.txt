@@ -20,6 +20,14 @@ context {
       dtype: DT_FLOAT
     }
   }
+  features {
+    key: "event_id"
+    value: {
+      description: "ID"
+      dtype: DT_INT64
+    }
+  }
+
 }
 
 node_sets {

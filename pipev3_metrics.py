@@ -30,7 +30,7 @@ gtspec = tfgnn.create_graph_spec_from_schema_pb(graph_schema)
 
 
 ########################
-def makeGT(id):
+def makeGT(id,counter):
     print("Generating GraphTensor for this event: ID =",id)
     hit_num = len(simu.loc[id][2]['sensor_pos_x'])+len(simu.loc[id][3]['sensor_pos_x'])
     hits = np.array([np.append(simu.loc[id][2]['t'],simu.loc[id][3]['t']),np.append(simu.loc[id][2]['sensor_pos_x'],simu.loc[id][3]['sensor_pos_x']),np.append(simu.loc[id][2]['sensor_pos_y'],simu.loc[id][3]['sensor_pos_y']),np.append(simu.loc[id][2]['sensor_pos_z'],simu.loc[id][3]['sensor_pos_z'])]).transpose()
@@ -46,6 +46,7 @@ def makeGT(id):
     fenergy = simu.loc[id][1]['injection_energy']
     fzenith = simu.loc[id][1]['injection_zenith']
     fazimuth = simu.loc[id][1]['injection_azimuth']
+    feventid = tf.cast(counter,dtype=tf.int64)
     
     hits_input = hits.flatten()
 
@@ -82,7 +83,7 @@ def makeGT(id):
         adjacency=hit_adjacency)
 
     context = tfgnn.Context.from_fields(
-        features={"injection_zenith":[fzenith],"event_energy":[fenergy],"injection_azimuth":[fazimuth]})
+        features={"injection_zenith":[fzenith],"event_energy":[fenergy],"injection_azimuth":[fazimuth],"event_id":[feventid]})
 
     graphtensor = tfgnn.GraphTensor.from_pieces(node_sets={"hit":hit},edge_sets={"coincidence":coincidence},context=context)
     #print("%%%%%%%%%%%")
@@ -98,11 +99,11 @@ with tf.io.TFRecordWriter('/n/home05/tzhu/work/icgen2/data_graph/SAM_E6nnmetrics
         simu = rp(simulationpath)
         print(f'#######begin file {x}#######')
         for i in range(1000):
-            graph = makeGT(i)
+            graph = makeGT(i,counter)
             if graph ==0:
-                counter+=1
                 continue
             else:
+                counter+=1
                 example = tfgnn.write_example(graph)
                 writer.write(example.SerializeToString())
 
