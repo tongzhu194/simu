@@ -27,6 +27,13 @@ context {
       dtype: DT_INT64
     }
   }
+  features {
+    key: "hit_num"
+    value: {
+      description: "hitnum"
+      dtype: DT_INT64
+    }
+  }
 
 }
 
