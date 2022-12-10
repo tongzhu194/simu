@@ -6,13 +6,11 @@ from tensorflow_gnn.models import gcn
 
 import numpy as np
 import matplotlib.pyplot as plt
-graph_schema = tfgnn.read_schema("/n/home05/tzhu/work/icgen2/algorithm/ic_schema_1127.txt")
+graph_schema = tfgnn.read_schema("/Users/mac/simu/debug/ic_schema_1127.txt")
 gtspec = tfgnn.create_graph_spec_from_schema_pb(graph_schema)
 
 
 
-gpus = tf.config.list_physical_devices(device_type = 'GPU')
-tf.config.experimental.set_memory_growth(gpus[0], True)
 ###############################
 D=4000.
 ###############################
@@ -23,73 +21,29 @@ def extract_labels(graph_tensor):
     return graph_tensor,true_vec
 
 ################################
-def initialize_args():
-    import argparse
-    parser =  argparse.ArgumentParser()
-    parser.add_argument(
-        "-md",
-        dest="mdfile",
-        type=str,
-        required=True
-    )
-    parser.add_argument(
-        "-date",
-        dest="date",
-        type=int,
-        required=True
-    )
-    parser.add_argument(
-        "-sub",
-        dest="sub",
-        type=int,
-        required=True
-    )
-    args = parser.parse_args()
-    return args
-
-
-    args = parser.parse_args()
-    return args
-
-args = initialize_args()
-mdfile = args.mdfile
-date = args.date
-sub = args.sub
+mdfile = 'vec_cos'
+date = 1128
+sub = 60
 
 ##############################
-train_filepattern = f"/n/holyscratch01/arguelles_delgado_lab/Everyone/tzhu/ICbigtrain_{sub}"
-valid_filepattern = f"/n/holyscratch01/arguelles_delgado_lab/Everyone/tzhu/ICbigvalid_{sub}"
+valid_filepattern = f"/Users/mac/simu/debug/SAM"
 
 
-print(train_filepattern)
 print(valid_filepattern)
-train_ds_provider = runner.TFRecordDatasetProvider(file_pattern=train_filepattern)
 valid_ds_provider = runner.TFRecordDatasetProvider(file_pattern=valid_filepattern)
 
 ##############################
-train_dataset = train_ds_provider.get_dataset(context=tf.distribute.InputContext())
-train_dataset = train_dataset.map(lambda serialized: tfgnn.parse_single_example(serialized=serialized,spec=gtspec))
-train_dataset = train_dataset.map(lambda graph_tensor: extract_labels(graph_tensor=graph_tensor))
-
-
 valid_dataset = valid_ds_provider.get_dataset(context=tf.distribute.InputContext())
 valid_dataset = valid_dataset.map(lambda serialized: tfgnn.parse_single_example(serialized=serialized,spec=gtspec))
 valid_dataset = valid_dataset.map(lambda graph_tensor: extract_labels(graph_tensor=graph_tensor))
 
-train_Number = 0
-for i,data in train_dataset.enumerate():
-        train_Number +=1
 valid_Number =0
 for i,data in valid_dataset.enumerate():
         valid_Number+=1
 
-print("train data:",train_Number)
 print("valid data:",valid_Number)
 
 batch_size = 16
-test_trds = train_ds_provider.get_dataset(context=tf.distribute.InputContext())
-test_trds = test_trds.map(lambda serialized: tfgnn.parse_single_example(serialized=serialized,spec=gtspec))
-test_trds_batched = test_trds.batch(batch_size=batch_size)
 
 valid_trds = valid_ds_provider.get_dataset(context=tf.distribute.InputContext())
 valid_trds = valid_trds.map(lambda serialized: tfgnn.parse_single_example(serialized=serialized,spec=gtspec))
@@ -107,8 +61,6 @@ def spextract_labels(graph_tensor):
     return graph_tensor,true_vec 
 
 
-test_trds_scalar = test_trds_batched.map(lambda graph_tensor_batch:merge(graph_tensor_batch=graph_tensor_batch))
-test_trds_scalar = test_trds_scalar.map(lambda graph_tensor: spextract_labels(graph_tensor=graph_tensor))
 valid_trds_scalar = valid_trds_batched.map(lambda graph_tensor_batch:merge(graph_tensor_batch=graph_tensor_batch))
 valid_trds_scalar = valid_trds_scalar.map(lambda graph_tensor: spextract_labels(graph_tensor=graph_tensor))
 
@@ -515,44 +467,15 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 termina = tf.keras.callbacks.TerminateOnNaN()
 
 ##########################
-md_path = f'./md_weights/{date}_ICbig{sub}_{mdfile}/'
+read_path = f'./md_weights/{date}_ICbig{sub}_{mdfile}/'+'200ep'
 
-md_path_result = md_path+'100ep'
+
 new_model =complex_mpnn_model(hidden_size_emb=126,hidden_gcn1=42,hidden_gcn2=56,hidden_gcn3=36,hidden_gcn4=14,graph_tensor_spec=gtspec)
-read_path =  f'./md_weights/1128_ICbig{sub}_{mdfile}/'+'200ep'
+
 load_model_weights(model=simple_ts_model,list_layer=list_layer,path=read_path)
 
-simple_ts_model.compile(tf.keras.optimizers.Adam(learning_rate=0.001),loss=cosine_loss,metrics=metrics)
-simplehistory_test = simple_ts_model.fit(test_trds_scalar,epochs = 100,verbose=2,validation_data=valid_trds_scalar, callbacks=[model_checkpoint_callback,termina])
-
-save_model_weights(model=simple_ts_model,list_layer=list_layer,path=md_path_result)
-
-sim2 = new_model
-load_model_weights(model=sim2,list_layer=list_layer,path=md_path_result)
-sim2.compile(tf.keras.optimizers.Adam(learning_rate=0.001),loss=AngularDifference,metrics=metrics)
-simplehistory_test2 = sim2.fit(test_trds_scalar,epochs = 100,verbose=2,validation_data=valid_trds_scalar, callbacks=[model_checkpoint_callback,termina])
-
-save_model_weights(model=sim2,list_layer=list_layer,path=md_path+'200ep')
-
-simplehistory_test3 = sim2.fit(test_trds_scalar,epochs = 100,verbose=2,validation_data=valid_trds_scalar, callbacks=[model_checkpoint_callback,termina])
-save_model_weights(model=sim2,list_layer=list_layer,path=md_path+'300ep')
 
 
-
-
-#num =1
-#for i in range(2,400):
-        #read_path = md_path+f'{num}ep'
-        #new_model =complex_mpnn_model(hidden_size_emb=126,hidden_gcn1=42,hidden_gcn2=56,hidden_gcn3=36,hidden_gcn4=14,graph_tensor_spec=gtspec)
-
-        #load_model_weights(model=new_model,list_layer=list_layer,path=read_path)
-        #new_model.compile(tf.keras.optimizers.Adam(learning_rate=0.001),loss=AngularDifference,metrics=metrics)
-        #history = new_model.fit(test_trds_scalar,epochs = 1,verbose=2,validation_data=valid_trds_scalar, callbacks=[model_checkpoint_callback,termina])
-
-        #num+=1
-        #md_path_result = md_path+f'{num}ep'
-
-        #save_model_weights(model=simple_ts_model,list_layer=list_layer,path=md_path_result)
 
 
 

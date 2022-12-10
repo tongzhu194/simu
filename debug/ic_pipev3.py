@@ -26,7 +26,7 @@ import knndatap
 #Last edit: 1102 we have ortho filter for interstring things now
 ##########################
 
-graph_schema = tfgnn.read_schema("/n/home05/tzhu/work/icgen2/algorithm/ic_schema_1127.txt")
+graph_schema = tfgnn.read_schema("/Users/mac/simu/debug/ic_schema_1127.txt")
 gtspec = tfgnn.create_graph_spec_from_schema_pb(graph_schema)
 
 interfilter = False
@@ -57,10 +57,6 @@ def makeGT(id,counter):
         hits = hits[:,0:4]
     print("There is",hit_num,"hit(s) in this event.")
     #print(hits)
-    tmin = hits[0,0]
-    tmax = hits[-1,0]
-    fmean = np.mean(hits,axis=0)
-    fcc = np.concatenate(([tmin,tmax],fmean),axis = 0)
     fenergy = simu.loc[id][1]['injection_energy']
     fzenith = simu.loc[id][1]['injection_zenith']
     fazimuth = simu.loc[id][1]['injection_azimuth']
@@ -75,6 +71,10 @@ def makeGT(id,counter):
     if bool(stbinding)==False:
         return 0
     
+    tmin = hits[0,0]
+    tmax = hits[-1,0]
+    fmean = np.mean(hits,axis=0)
+    fcc = np.concatenate(([tmin,tmax],fmean),axis = 0)
 
     #print(tmp)
     hit_sources = stbinding[1::3]
@@ -112,20 +112,10 @@ def makeGT(id,counter):
 
 ##############################
 counter =0
-with tf.io.TFRecordWriter('/n/holyscratch01/arguelles_delgado_lab/Everyone/tzhu/IC_Mu_test') as writer:
-#with tf.io.TFRecordWriter(f'/n/holyscratch01/arguelles_delgado_lab/Everyone/tzhu/SAM_6nnIDmetrics_1_70') as writer:
-    for x in range(1,31):
-        #simulationpath = '/n/holyscratch01/arguelles_delgado_lab/Everyone/tzhu/simu/hexa/data/MuMinus_Hadrons_seed_'+str(x)+'_meta_data.parquet'
-        #simulationpath = '/n/home05/tzhu/work/icgen2/gputest2/data/MuMinus_Hadrons_seed_'+str(x)+'_meta_data.parquet'
-        #simulationpath = '/n/holylfs05/LABS/arguelles_delgado_lab/Everyone/tzhu/simudata/ortho240/data/MuMinus_Hadrons_seed_'+str(x)+'_meta_data.parquet'
-        empty=[17,18,19,20,27]
-        if(np.isin(x,empty)==True):
-            continue
-
-        simulationpath = '/n/holylfs05/LABS/arguelles_delgado_lab/Everyone/jlazar/ic_ssnet_sim/data/MuMinus_Hadrons_seed_'+str(x)+'_meta_data.parquet'
-
+with tf.io.TFRecordWriter('/Users/mac/simu/debug/SAM') as writer:
+        simulationpath = '/Users/mac/simu/debug/MuMinus_Hadrons_seed_1_meta_data.parquet'
         simu = rp(simulationpath)
-        print(f'#######begin file {x}#######')
+        print(f'#######begin file#######')
         for i in range(5000):
             graph = makeGT(i,counter)
             if graph ==0:
