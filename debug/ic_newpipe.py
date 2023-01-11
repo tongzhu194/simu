@@ -223,7 +223,7 @@ def makeGT(id,counter):
     hit = tfgnn.NodeSet.from_fields(
         sizes = [hit_num],
         features={ 
-            "4Dvec":tf.cast(hits_norm,dtype=tf.float32),
+            "4Dvec":tf.cast(hits,dtype=tf.float32),
         })
     coincidence = tfgnn.EdgeSet.from_fields(
         sizes = tf.shape(hit_sources),

@@ -1,0 +1,76 @@
+context {
+  features {
+    key: "event_energy"
+    value: {
+      description: "MC fact (GeV)"
+      dtype: DT_FLOAT
+    }
+  }
+  features {
+    key: "injection_zenith"
+    value: {
+      description: "zenith"
+      dtype: DT_FLOAT
+    }
+  }
+  features {
+    key: "injection_azimuth"
+    value: {
+      description: "azimuth"
+      dtype: DT_FLOAT
+    }
+  }
+  features {
+    key: "event_id"
+    value: {
+      description: "ID"
+      dtype: DT_INT64
+    }
+  }
+  features {
+    key: "hit_num"
+    value: {
+      description: "hitnum"
+      dtype: DT_INT64
+    }
+  }
+  features {
+    key: "cc"
+    value: {
+      description: "cc(tmin,tmax,t,x,y,z)"
+      dtype: DT_FLOAT
+      shape: { dim { size: 6 } }
+    }
+  }
+
+}
+
+node_sets {
+  key: "hit"
+  value {
+    features {
+      key: "4Dvec"
+      value: {
+        description: "(ct,x,y,z) (m))"
+        dtype: DT_FLOAT
+        shape: { dim { size: 4 } }
+      }
+    }
+  }
+}
+
+edge_sets {
+  key: "coincidence"
+  value {
+    source: "hit"
+    target: "hit"
+    features {
+      key: "metric"
+      value: {
+        description: "Polynomial of Eucilidean distance(4D)"
+        dtype: DT_FLOAT
+        shape: { dim { size: 2 } }
+      }
+    }
+  }
+}
